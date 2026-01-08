@@ -28,7 +28,7 @@ const DEFAULT_MENU_ITEMS: SidebarMenuItem[] = [
   { 
     id: 'cme', 
     label: 'CME/CE', 
-    icon: 'graduation-hat-02',
+    icon: 'graduation-hat-01',
     children: [
       {
         id: 'cme-series',
@@ -84,11 +84,11 @@ const DEFAULT_MENU_ITEMS: SidebarMenuItem[] = [
       }
     ]
   },
-  { id: 'specialty', label: 'Specialty', icon: 'stethoscope-1' },
+  { id: 'specialty', label: 'Specialty', icon: 'stethoscope' },
   { id: 'industry', label: 'Industry Features', icon: 'lightbulb-02' },
-  { id: 'news', label: 'News', icon: 'layout-alt-02' },
+  { id: 'news', label: 'News', icon: 'file-04' },
   { id: 'live', label: 'Live', icon: 'video-recorder' },
-  { id: 'series', label: 'Series', icon: 'series-01' },
+  { id: 'series', label: 'Series', icon: 'dots-grid-01' },
   { id: 'explore', label: 'Explore' },
   { id: 'clara', label: 'Clara', icon: 'stars-01' },
   { id: 'qchallenge', label: 'Q-Challenge', icon: 'trophy-01' },
@@ -206,7 +206,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
   };
 
   const isDesktop = variant === 'desktop';
-  const isMobile = variant === 'mobile';
+  // const isMobile = variant === 'mobile';
 
   return (
     <aside 

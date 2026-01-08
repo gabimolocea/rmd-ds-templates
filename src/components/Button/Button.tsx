@@ -1,5 +1,4 @@
 import React from 'react';
-import { colors, typography, spacing, borderRadius } from '../../tokens';
 import './Button.css';
 
 export type ButtonSize = 'small' | 'medium' | 'large';

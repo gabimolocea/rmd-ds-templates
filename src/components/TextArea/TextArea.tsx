@@ -1,4 +1,4 @@
-import React, { useState, useRef, ChangeEvent, FocusEvent } from 'react';
+import { useState, useRef, ChangeEvent, FocusEvent } from 'react';
 import { Icon } from '../Icon';
 import './TextArea.css';
 

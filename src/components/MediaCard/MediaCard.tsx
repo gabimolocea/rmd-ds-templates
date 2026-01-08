@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { Icon } from '../Icon';
 import './MediaCard.css';
 
@@ -60,7 +60,7 @@ export function MediaCard({
           <div className="media-card-badges">
             {hasVideo && (
               <div className="media-card-badge">
-                <Icon name="play-square" size="md" color="white" />
+                <Icon name="play" size="md" color="white" />
               </div>
             )}
             {hasClosedCaption && (
@@ -100,7 +100,7 @@ export function MediaCard({
         {/* Footer with credits */}
         {credits && (
           <div className="media-card-footer">
-            <Icon name="graduation-hat-02" size="md" color="#1c1c1c" />
+            <Icon name="graduation-hat-01" size="md" color="#1c1c1c" />
             <p className="media-card-credits">{credits}</p>
           </div>
         )}

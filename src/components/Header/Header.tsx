@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Icon } from '../Icon';
 import { AccountDropdown } from '../AccountDropdown';
 import './Header.css';
@@ -24,7 +24,7 @@ export function Header({
   role = 'guest',
   onMenuClick,
   onSearchClick,
-  onSearchSubmit,
+  // onSearchSubmit,
   onLoginClick,
   onRegisterClick,
   onNotificationsClick,

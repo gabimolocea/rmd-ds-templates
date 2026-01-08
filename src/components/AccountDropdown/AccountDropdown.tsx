@@ -1,4 +1,3 @@
-import React from 'react';
 import { Icon } from '../Icon';
 import './AccountDropdown.css';
 import './AccountDropdown.css';
@@ -49,12 +48,12 @@ export function AccountDropdown({
       {/* Body Section */}
       <div className="account-dropdown-body">
         <button className="account-dropdown-item" onClick={onCreditsClick}>
-          <Icon name="graduation-hat-02" size="md" color="#6c6c72" />
+          <Icon name="graduation-hat-01" size="md" color="#6c6c72" />
           <span>Credits</span>
         </button>
         
         <button className="account-dropdown-item" onClick={onHistoryClick}>
-          <Icon name="clock-rewind" size="md" color="#6c6c72" />
+          <Icon name="calendar" size="md" color="#6c6c72" />
           <span>History</span>
         </button>
         
@@ -64,7 +63,7 @@ export function AccountDropdown({
         </button>
         
         <button className="account-dropdown-item" onClick={onSubscriptionsClick}>
-          <Icon name="star-01" size="md" color="#6c6c72" />
+          <Icon name="stars-01" size="md" color="#6c6c72" />
           <span>Subscriptions</span>
         </button>
         

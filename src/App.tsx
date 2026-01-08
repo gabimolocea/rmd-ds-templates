@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { Button } from './components/Button';
 import { Badge } from './components/Badge';
@@ -50,13 +50,12 @@ function App() {
   
   // Template states
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
-  const [templateUserName, setTemplateUserName] = useState('Dr. Sarah Johnson');
+  const [templateUserName] = useState('Dr. Sarah Johnson');
   const [isTemplateFullScreen, setIsTemplateFullScreen] = useState(false);
   const [showClosedCaptions, setShowClosedCaptions] = useState(false);
   const [isRadioPlaying, setIsRadioPlaying] = useState(false);
   const [selectedLayout, setSelectedLayout] = useState<'left-sidebar' | 'full-width' | 'two-column'>('left-sidebar');
   const [activeTab, setActiveTab] = useState('All');
-  const [selectedSpecialty, setSelectedSpecialty] = useState('Cardiology');
   
   // Button states
   const [label, setLabel] = useState('Button');
@@ -901,7 +900,7 @@ function App() {
                   <label>Code</label>
                   <pre className="code-block">
 {`<Breadcrumbs
-  items={[${breadcrumbItems.map((_, i) => `\n    { label: 'Link', href: '#' }`).join(',')}
+  items={[${breadcrumbItems.map(() => `\n    { label: 'Link', href: '#' }`).join(',')}
   ]}${!showHomeIcon ? '\n  showHomeIcon={false}' : ''}
 />`}
                   </pre>
@@ -2180,13 +2179,14 @@ function App() {
                   </div>
                 </div>
 
-                <Button
-                  label="View Template"
-                  variant="primary"
-                  size="medium"
-                  onClick={() => setIsTemplateFullScreen(true)}
-                  style={{ marginTop: '24px' }}
-                />
+                <div style={{ marginTop: '24px' }}>
+                  <Button
+                    label="View Template"
+                    variant="primary"
+                    size="medium"
+                    onClick={() => setIsTemplateFullScreen(true)}
+                  />
+                </div>
               </div>
               
               <div className="template-preview-container">

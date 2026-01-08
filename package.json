@@ -7,7 +7,9 @@
     "build": "tsc && vite build",
     "preview": "vite preview",
     "fetch-tokens": "node scripts/fetch-tokens.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "repository": {
     "type": "git",
@@ -19,7 +21,7 @@
   "bugs": {
     "url": "https://github.com/gabimolocea/rmd-ds-templates/issues"
   },
-  "homepage": "https://github.com/gabimolocea/rmd-ds-templates#readme",
+  "homepage": "https://yourusername.github.io/repo-name",
   "description": "",
   "dependencies": {
     "@types/react": "^19.2.7",
@@ -32,6 +34,7 @@
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^5.1.2",
+    "gh-pages": "^6.3.0",
     "typescript": "^5.9.3",
     "vite": "^7.3.1"
   }

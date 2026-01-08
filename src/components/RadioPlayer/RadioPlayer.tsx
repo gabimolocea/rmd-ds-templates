@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Icon } from '../Icon';
 import './RadioPlayer.css';
 
@@ -28,8 +28,8 @@ export const RadioPlayer: React.FC<RadioPlayerProps> = ({
   showClosedCaptions = false,
   closedCaptionText = 'directly, or indirectly, involved in the care of patients with MM',
   onPlayPause,
-  onRewind,
-  onForward,
+  // onRewind,
+  // onForward,
   onSave,
   onShare,
   onClosedCaptionsToggle,
@@ -60,7 +60,7 @@ export const RadioPlayer: React.FC<RadioPlayerProps> = ({
             onClick={onPlayPause}
             aria-label={isPlaying ? 'Pause' : 'Play'}
           >
-            <Icon name={isPlaying ? 'pause' : 'play-01'} size="md" color="white" />
+            <Icon name={isPlaying ? 'pause' : 'play'} size="md" color="white" />
           </button>
           <div className="radio-player-info">
             <div className="radio-player-station">
