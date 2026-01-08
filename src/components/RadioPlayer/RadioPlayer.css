@@ -1,0 +1,222 @@
+/* Radio Player Container */
+.radio-player {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* Progress Bar */
+.radio-player-progress {
+  width: 100%;
+  height: 2px;
+  background-color: #dcdcdc;
+}
+
+.radio-player-progress-track {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.radio-player-progress-fill {
+  height: 100%;
+  background-color: #0b66e4;
+  border-top-right-radius: 16px;
+  border-bottom-right-radius: 16px;
+  transition: width 0.3s ease;
+}
+
+/* Main Controls */
+.radio-player-main {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 24px;
+  gap: 12px;
+}
+
+/* Left Column */
+.radio-player-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-right: 48px;
+}
+
+.radio-player-play-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 8px;
+  background-color: #0b66e4;
+  border: none;
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.radio-player-play-button:hover {
+  background-color: #0952b8;
+}
+
+.radio-player-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.radio-player-station {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.radio-player-station-name {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  color: #1c1c1c;
+  white-space: nowrap;
+}
+
+.radio-player-live-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px 6px;
+  background-color: #f4faff;
+  border: 1px solid #2a7efe;
+  border-radius: 4px;
+}
+
+.radio-player-live-badge span {
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 12px;
+  color: #2a7efe;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Middle Column */
+.radio-player-middle {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  max-width: 1280px;
+  min-width: 0;
+}
+
+.radio-player-title {
+  flex: 1;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  color: #1c1c1c;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 0;
+  text-align: center;
+}
+
+
+/* Right Column */
+.radio-player-right {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding-left: 48px;
+}
+
+.radio-player-icon-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  background-color: transparent;
+  border: none;
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.radio-player-icon-button:hover {
+  background-color: #f4f4f3;
+}
+
+/* Closed Captions */
+.radio-player-captions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px 8px 24px;
+  background-color: white;
+}
+
+.radio-player-captions-spacer-left {
+  flex: 1;
+  max-width: 252px;
+  height: 7px;
+  opacity: 0;
+}
+
+.radio-player-captions-text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 28px;
+  padding: 4px 12px;
+  background-color: #eaeaea;
+  border-radius: 4px;
+}
+
+.radio-player-captions-text p {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  color: #525257;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 0;
+}
+
+.radio-player-captions-spacer-right {
+  flex: 1;
+  max-width: 143px;
+  height: 7px;
+  opacity: 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .radio-player-main {
+    padding: 8px 16px;
+  }
+
+  .radio-player-left {
+    padding-right: 24px;
+  }
+
+  .radio-player-right {
+    padding-left: 24px;
+  }
+
+  .radio-player-captions {
+    padding: 0 16px 8px 16px;
+  }
+}

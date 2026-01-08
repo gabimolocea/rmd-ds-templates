@@ -1,0 +1,324 @@
+/* Button Component Styles - ReachMD Design System v1.0 */
+
+.rmd-button {
+  /* Base styles */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  transition: all 0.2s ease-in-out;
+  white-space: nowrap;
+  position: relative;
+  border-radius: 9999px; /* pill shape */
+  
+  /* Remove default button styles */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  text-decoration: none;
+  outline: none;
+}
+
+.rmd-button:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 4px;
+  border-radius: 9999px;
+}
+
+/* Focused state (for demo purposes) */
+.rmd-button--focused {
+  position: relative;
+}
+
+.rmd-button--focused::before {
+  content: '';
+  position: absolute;
+  top: -6px;
+  left: -6px;
+  right: -6px;
+  bottom: -6px;
+  border: 2px solid currentColor;
+  border-radius: 6px;
+  pointer-events: none;
+}
+
+.rmd-button--focused.rmd-button--primary.rmd-button--primary::before {
+  border-color: #004cb2;
+}
+
+.rmd-button--focused.rmd-button--primary.rmd-button--guava::before {
+  border-color: #d62400;
+}
+
+.rmd-button--focused.rmd-button--primary.rmd-button--error::before {
+  border-color: #72111d;
+}
+
+.rmd-button--focused.rmd-button--primary.rmd-button--neutral::before {
+  border-color: #dcdcdc;
+}
+
+.rmd-button--focused.rmd-button--secondary.rmd-button--primary::before {
+  border-color: #004cb2;
+}
+
+.rmd-button--focused.rmd-button--secondary.rmd-button--guava::before {
+  border-color: #d62400;
+}
+
+.rmd-button--focused.rmd-button--secondary.rmd-button--error::before {
+  border-color: #72111d;
+}
+
+.rmd-button--focused.rmd-button--secondary.rmd-button--neutral::before {
+  border-color: #dcdcdc;
+}
+
+.rmd-button--focused.rmd-button--tertiary.rmd-button--primary::before {
+  border-color: #004cb2;
+}
+
+.rmd-button--focused.rmd-button--tertiary.rmd-button--guava::before {
+  border-color: #d62400;
+}
+
+.rmd-button--focused.rmd-button--tertiary.rmd-button--error::before {
+  border-color: #72111d;
+}
+
+.rmd-button--focused.rmd-button--tertiary.rmd-button--neutral::before {
+  border-color: #dcdcdc;
+}
+
+/* Sizes */
+.rmd-button--large {
+  padding: 12px 24px;
+  gap: 8px;
+  height: 48px;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.rmd-button--medium {
+  padding: 8px 16px;
+  gap: 8px;
+  height: 40px;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.rmd-button--small {
+  padding: 8px 12px;
+  gap: 4px;
+  height: 36px;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+/* Primary Variant */
+.rmd-button--primary.rmd-button--primary {
+  color: #ffffff;
+  background-color: #0b66e4;
+}
+
+.rmd-button--primary.rmd-button--primary:hover:not(:disabled) {
+  background-color: #004cb2;
+}
+
+.rmd-button--primary.rmd-button--primary:active:not(:disabled) {
+  background-color: #004cb2;
+}
+
+.rmd-button--primary.rmd-button--guava {
+  background-color: #fa4b35;
+}
+
+.rmd-button--primary.rmd-button--guava:hover:not(:disabled) {
+  background-color: #d62400;
+}
+
+.rmd-button--primary.rmd-button--error {
+  background-color: #d5351f;
+}
+
+.rmd-button--primary.rmd-button--error:hover:not(:disabled) {
+  background-color: #b41d08;
+}
+
+.rmd-button--primary.rmd-button--neutral {
+  color: #1c1c1c;
+  background-color: #f4f4f3;
+}
+
+.rmd-button--primary.rmd-button--neutral:hover:not(:disabled) {
+  background-color: #eaeaea;
+}
+
+.rmd-button--primary.rmd-button--neutral:active:not(:disabled) {
+  background-color: #dcdcdc;
+}
+
+/* Secondary Variant */
+.rmd-button--secondary.rmd-button--primary {
+  color: #0b66e4;
+  background-color: transparent;
+  border: 2px solid #0b66e4;
+}
+
+.rmd-button--secondary.rmd-button--primary:hover:not(:disabled) {
+  color: #004cb2;
+  background-color: #f7fcfc;
+  border-color: #004cb2;
+}
+
+.rmd-button--secondary.rmd-button--primary:active:not(:disabled) {
+  color: #004cb2;
+  background-color: #f2f7ff;
+  border-color: #004cb2;
+}
+
+.rmd-button--secondary.rmd-button--guava {
+  color: #fa4b35;
+  background-color: transparent;
+  border: 2px solid #fa4b35;
+}
+
+.rmd-button--secondary.rmd-button--guava:hover:not(:disabled) {
+  color: #d62400;
+  background-color: #fff9f8;
+  border-color: #d62400;
+}
+
+.rmd-button--secondary.rmd-button--guava:active:not(:disabled) {
+  color: #d62400;
+  background-color: #fff3f1;
+  border-color: #d62400;
+}
+
+.rmd-button--secondary.rmd-button--error {
+  color: #d5351f;
+  background-color: transparent;
+  border: 2px solid #d5351f;
+}
+
+.rmd-button--secondary.rmd-button--error:hover:not(:disabled) {
+  color: #b41d08;
+  background-color: #fff7f5;
+  border-color: #b41d08;
+}
+
+.rmd-button--secondary.rmd-button--neutral {
+  color: #1c1c1c;
+  background-color: transparent;
+  border: 2px solid #1c1c1c;
+}
+
+.rmd-button--secondary.rmd-button--neutral:hover:not(:disabled) {
+  background-color: rgba(28, 28, 28, 0.05);
+}
+
+/* Tertiary Variant */
+.rmd-button--tertiary.rmd-button--primary {
+  color: #0b66e4;
+  background-color: transparent;
+  border: none;
+}
+
+.rmd-button--tertiary.rmd-button--primary:hover:not(:disabled) {
+  color: #004cb2;
+  background-color: #f7fcfc;
+}
+
+.rmd-button--tertiary.rmd-button--guava {
+  color: #fa4b35;
+  background-color: transparent;
+  border: none;
+}
+
+.rmd-button--tertiary.rmd-button--guava:hover:not(:disabled) {
+  color: #d62400;
+  background-color: #fff9f8;
+}
+
+.rmd-button--tertiary.rmd-button--guava:active:not(:disabled) {
+  background-color: #fff3f1;
+}
+
+.rmd-button--tertiary.rmd-button--error {
+  color: #d5351f;
+  background-color: transparent;
+  border: none;
+}
+
+.rmd-button--tertiary.rmd-button--error:hover:not(:disabled) {
+  color: #b41d08;
+  background-color: #fff7f5;
+}
+
+.rmd-button--tertiary.rmd-button--neutral {
+  color: #1c1c1c;
+  background-color: transparent;
+  border: none;
+}
+
+.rmd-button--tertiary.rmd-button--neutral:hover:not(:disabled) {
+  background-color: rgba(28, 28, 28, 0.05);
+}
+
+/* Disabled State */
+.rmd-button--disabled,
+.rmd-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* Loading State */
+.rmd-button--loading {
+  pointer-events: none;
+  position: relative;
+}
+
+.rmd-button__spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: rmd-button-spin 0.6s linear infinite;
+}
+
+@keyframes rmd-button-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Icon spacing */
+.rmd-button__icon-before,
+.rmd-button__icon-after {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.rmd-button__icon-before svg,
+.rmd-button__icon-after svg {
+  width: 24px;
+  height: 24px;
+}
+
+.rmd-button--small .rmd-button__icon-before svg,
+.rmd-button--small .rmd-button__icon-after svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* Label */
+.rmd-button__label {
+  display: inline-flex;
+  align-items: center;
+}

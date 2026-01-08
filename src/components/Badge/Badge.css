@@ -1,0 +1,106 @@
+/* Badge Component Styles - ReachMD Design System v1.0 */
+
+.rmd-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px;
+  border-radius: 9999px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0;
+}
+
+.rmd-badge__content {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  height: 12px;
+}
+
+.rmd-badge__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+.rmd-badge__icon svg {
+  width: 16px;
+  height: 16px;
+}
+
+.rmd-badge__label {
+  flex-shrink: 0;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 16px;
+}
+
+/* Neutral Variant */
+.rmd-badge--neutral.rmd-badge--outline {
+  background-color: #ffffff;
+  border: 1px solid #525257;
+  color: #1c1c1c;
+}
+
+.rmd-badge--neutral.rmd-badge--filled {
+  background-color: #fbfafa;
+  border: none;
+  color: #1c1c1c;
+}
+
+/* Warning Variant */
+.rmd-badge--warning.rmd-badge--outline {
+  background-color: #ffffff;
+  border: 1px solid #8a6500;
+  color: #8a6500;
+}
+
+.rmd-badge--warning.rmd-badge--filled {
+  background-color: #fff4e0;
+  border: none;
+  color: #8a6500;
+}
+
+/* Error Variant */
+.rmd-badge--error.rmd-badge--outline {
+  background-color: #ffffff;
+  border: 1px solid #d41537;
+  color: #d41537;
+}
+
+.rmd-badge--error.rmd-badge--filled {
+  background-color: #fff1f1;
+  border: none;
+  color: #d41537;
+}
+
+/* Success Variant */
+.rmd-badge--success.rmd-badge--outline {
+  background-color: #ffffff;
+  border: 1px solid #007575;
+  color: #007575;
+}
+
+.rmd-badge--success.rmd-badge--filled {
+  background-color: #e9f4f4;
+  border: none;
+  color: #007575;
+}
+
+/* Information Variant */
+.rmd-badge--information.rmd-badge--outline {
+  background-color: #ffffff;
+  border: 1px solid #0b66e4;
+  color: #0b66e4;
+}
+
+.rmd-badge--information.rmd-badge--filled {
+  background-color: #f2f7ff;
+  border: none;
+  color: #0b66e4;
+}
