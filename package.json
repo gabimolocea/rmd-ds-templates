@@ -21,7 +21,7 @@
   "bugs": {
     "url": "https://github.com/gabimolocea/rmd-ds-templates/issues"
   },
-  "homepage": "https://yourusername.github.io/repo-name",
+  "homepage": "https://gabimolocea.github.io/rmd-ds-templates",
   "description": "",
   "dependencies": {
     "@types/react": "^19.2.7",
