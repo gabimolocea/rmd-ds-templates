@@ -12,6 +12,8 @@ import { TextArea } from './components/TextArea';
 import { Header } from './components/Header';
 import { Sidebar } from './components/Sidebar';
 import { RadioPlayer } from './components/RadioPlayer';
+import { MediaCard } from './components/MediaCard';
+import { Icon } from './components/Icon';
 import type { ButtonSize, ButtonVariant, ButtonColor } from './components/Button';
 import type { BadgeVariant, BadgeStyle } from './components/Badge';
 import type { AlertVariant, AlertStyle } from './components/Alert';
@@ -23,7 +25,7 @@ import type { ValidationState } from './components/TextArea';
 import type { HeaderRole } from './components/Header';
 import './App.css';
 
-type DemoComponent = 'button' | 'badge' | 'alert' | 'breadcrumbs' | 'checkbox' | 'radio' | 'autocomplete' | 'datepicker' | 'textarea' | 'header' | 'sidebar' | 'template-default';
+type DemoComponent = 'button' | 'badge' | 'alert' | 'breadcrumbs' | 'checkbox' | 'radio' | 'autocomplete' | 'datepicker' | 'textarea' | 'header' | 'sidebar' | 'template-default' | 'homepage';
 
 function App() {
   const navigate = useNavigate();
@@ -52,6 +54,9 @@ function App() {
   const [isTemplateFullScreen, setIsTemplateFullScreen] = useState(false);
   const [showClosedCaptions, setShowClosedCaptions] = useState(false);
   const [isRadioPlaying, setIsRadioPlaying] = useState(false);
+  const [selectedLayout, setSelectedLayout] = useState<'left-sidebar' | 'full-width' | 'two-column'>('left-sidebar');
+  const [activeTab, setActiveTab] = useState('All');
+  const [selectedSpecialty, setSelectedSpecialty] = useState('Cardiology');
   
   // Button states
   const [label, setLabel] = useState('Button');
@@ -242,6 +247,12 @@ function App() {
               onClick={() => setActiveComponent('template-default')}
             >
               Default Template
+            </button>
+            <button 
+              className={activeComponent === 'homepage' ? 'active' : ''}
+              onClick={() => setActiveComponent('homepage')}
+            >
+              Homepage
             </button>
           </nav>
         </aside>
@@ -2104,14 +2115,77 @@ function App() {
             <div className="template-container">
               <div className="template-header-section">
                 <h2 className="panel-title">Default Template</h2>
-                <p style={{ fontSize: '14px', color: '#525257', marginBottom: '16px' }}>
-                  A complete page template with Header and collapsible Sidebar navigation.
+                <p style={{ fontSize: '14px', color: '#525257', marginBottom: '24px' }}>
+                  A complete page template with Header and collapsible Sidebar navigation. The global template supports multiple layout configurations.
                 </p>
+                
+                <div className="layout-options-grid">
+                  <div 
+                    className={`layout-option-card ${selectedLayout === 'left-sidebar' ? 'selected' : ''}`}
+                    onClick={() => {
+                      setSelectedLayout('left-sidebar');
+                      setIsSidebarOpen(true);
+                      setIsTemplateFullScreen(true);
+                    }}
+                  >
+                    <div className="layout-thumbnail layout-sidebar-left">
+                      <div className="thumb-header"></div>
+                      <div className="thumb-body">
+                        <div className="thumb-sidebar-left"></div>
+                        <div className="thumb-main"></div>
+                      </div>
+                      <div className="thumb-footer"></div>
+                    </div>
+                    <h3 className="layout-option-title">Left Sidebar Layout</h3>
+                    <p className="layout-option-description">Navigation sidebar + main content area (1200px total width)</p>
+                  </div>
+
+                  <div 
+                    className={`layout-option-card ${selectedLayout === 'full-width' ? 'selected' : ''}`}
+                    onClick={() => {
+                      setSelectedLayout('full-width');
+                      setIsSidebarOpen(true);
+                      setIsTemplateFullScreen(true);
+                    }}
+                  >
+                    <div className="layout-thumbnail layout-full-width">
+                      <div className="thumb-header"></div>
+                      <div className="thumb-body">
+                        <div className="thumb-main-full"></div>
+                      </div>
+                      <div className="thumb-footer"></div>
+                    </div>
+                    <h3 className="layout-option-title">Full Width Layout</h3>
+                    <p className="layout-option-description">Single column with 1200px max width</p>
+                  </div>
+
+                  <div 
+                    className={`layout-option-card ${selectedLayout === 'two-column' ? 'selected' : ''}`}
+                    onClick={() => {
+                      setSelectedLayout('two-column');
+                      setIsSidebarOpen(true);
+                      setIsTemplateFullScreen(true);
+                    }}
+                  >
+                    <div className="layout-thumbnail layout-two-column">
+                      <div className="thumb-header"></div>
+                      <div className="thumb-body">
+                        <div className="thumb-main-content"></div>
+                        <div className="thumb-sidebar-right"></div>
+                      </div>
+                      <div className="thumb-footer"></div>
+                    </div>
+                    <h3 className="layout-option-title">Two Column Layout</h3>
+                    <p className="layout-option-description">Main content + right sidebar (1200px total width)</p>
+                  </div>
+                </div>
+
                 <Button
                   label="View Template"
                   variant="primary"
                   size="medium"
                   onClick={() => setIsTemplateFullScreen(true)}
+                  style={{ marginTop: '24px' }}
                 />
               </div>
               
@@ -2162,6 +2236,14 @@ function App() {
           {isTemplateFullScreen && (
             <div className="template-fullscreen-overlay">
               <div className="template-fullscreen-content">
+                <button 
+                  className="template-close-button"
+                  onClick={() => setIsTemplateFullScreen(false)}
+                  aria-label="Close preview"
+                >
+                  ✕
+                </button>
+                
                 <Header
                   role="user"
                   userName={templateUserName}
@@ -2178,16 +2260,429 @@ function App() {
                     onMenuItemClick={(itemId) => console.log('Clicked:', itemId)}
                   />
                   
-                  <div className="template-main-content">
-                    <div className="content-placeholder">
-                      <h1>Main Content Area</h1>
-                      <p>This is the main content area. Click the hamburger menu in the header to toggle the sidebar.</p>
-                      <p style={{ marginTop: '16px' }}>Sidebar is currently: <strong>{isSidebarOpen ? 'Open' : 'Closed'}</strong></p>
-                      <div style={{ marginTop: '32px' }}>
-                        <h2 style={{ fontSize: '24px', marginBottom: '12px' }}>Sample Content Section</h2>
-                        <p>This is a full-screen preview of the template. You can interact with all components.</p>
-                        <p style={{ marginTop: '12px' }}>The radio player is fixed at the bottom of the screen.</p>
-                        <p style={{ marginTop: '12px' }}>Click the CC button to toggle closed captions.</p>
+                  {selectedLayout === 'left-sidebar' && (
+                    <div className="template-main-content">
+                      <div className="content-placeholder">
+                        <h1>Left Sidebar Layout</h1>
+                        <p>This layout includes a collapsible navigation sidebar on the left and a main content area.</p>
+                        <p style={{ marginTop: '16px' }}>Sidebar is currently: <strong>{isSidebarOpen ? 'Open' : 'Closed'}</strong></p>
+                        <div style={{ marginTop: '32px' }}>
+                          <h2 style={{ fontSize: '24px', marginBottom: '12px' }}>Layout Details</h2>
+                          <p>• Total width: 1200px max</p>
+                          <p style={{ marginTop: '8px' }}>• Sidebar: 240px when open</p>
+                          <p style={{ marginTop: '8px' }}>• Main content: Flexible</p>
+                          <p style={{ marginTop: '8px' }}>• Click the hamburger menu to toggle the sidebar</p>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {selectedLayout === 'full-width' && (
+                    <div className="template-main-content template-main-full-width">
+                      <div className="content-placeholder content-full-width">
+                        <h1>Full Width Layout</h1>
+                        <p>This layout provides a single column with a maximum width of 1200px, centered on the page.</p>
+                        <p style={{ marginTop: '16px' }}>Sidebar is currently: <strong>{isSidebarOpen ? 'Open' : 'Closed'}</strong></p>
+                        <div style={{ marginTop: '32px' }}>
+                          <h2 style={{ fontSize: '24px', marginBottom: '12px' }}>Layout Details</h2>
+                          <p>• Maximum width: 1200px</p>
+                          <p style={{ marginTop: '8px' }}>• Centered content</p>
+                          <p style={{ marginTop: '8px' }}>• Navigation sidebar can be toggled</p>
+                          <p style={{ marginTop: '8px' }}>• Ideal for article pages, landing pages, or simple content</p>
+                        </div>
+                        <div style={{ marginTop: '32px', padding: '24px', background: '#f4f4f3', borderRadius: '8px' }}>
+                          <h3 style={{ fontSize: '18px', marginBottom: '12px' }}>Sample Content Block</h3>
+                          <p>This is an example of how content would appear in the full-width layout. The content stretches to fill the available space while maintaining readability with the 1200px constraint.</p>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {selectedLayout === 'two-column' && (
+                    <div className="template-main-content template-two-column-layout">
+                      <div className="template-column-main">
+                        <div className="content-placeholder">
+                          <h1>Two Column Layout</h1>
+                          <p>This layout features a main content area and a right sidebar, both within a 1200px max width container.</p>
+                          <p style={{ marginTop: '16px' }}>Sidebar is currently: <strong>{isSidebarOpen ? 'Open' : 'Closed'}</strong></p>
+                          <div style={{ marginTop: '32px' }}>
+                            <h2 style={{ fontSize: '24px', marginBottom: '12px' }}>Main Content Area</h2>
+                            <p>• Takes up approximately 70% of the available width</p>
+                            <p style={{ marginTop: '8px' }}>• Primary content goes here</p>
+                            <p style={{ marginTop: '8px' }}>• Articles, posts, or main information</p>
+                          </div>
+                          <div style={{ marginTop: '32px', padding: '24px', background: '#f4f4f3', borderRadius: '8px' }}>
+                            <h3 style={{ fontSize: '18px', marginBottom: '12px' }}>Content Section</h3>
+                            <p>The main column is perfect for long-form content like articles, blog posts, or detailed information that benefits from a wider reading area.</p>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="template-column-sidebar">
+                        <div className="content-placeholder" style={{ padding: '24px', background: 'white', borderRadius: '8px' }}>
+                          <h3 style={{ fontSize: '18px', marginBottom: '12px', color: '#1c1c1c' }}>Right Sidebar</h3>
+                          <p style={{ fontSize: '14px', color: '#6c6c72' }}>• Takes up ~30% width</p>
+                          <p style={{ fontSize: '14px', color: '#6c6c72', marginTop: '8px' }}>• Related content</p>
+                          <p style={{ fontSize: '14px', color: '#6c6c72', marginTop: '8px' }}>• Navigation widgets</p>
+                          <p style={{ fontSize: '14px', color: '#6c6c72', marginTop: '8px' }}>• Ads or promotions</p>
+                          <div style={{ marginTop: '24px', padding: '16px', background: '#f4f4f3', borderRadius: '8px' }}>
+                            <p style={{ fontSize: '14px', fontWeight: 600, marginBottom: '8px' }}>Widget Example</p>
+                            <p style={{ fontSize: '12px', color: '#6c6c72' }}>Sidebar widgets and components would appear here.</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                <RadioPlayer
+                  isPlaying={isRadioPlaying}
+                  showClosedCaptions={showClosedCaptions}
+                  onPlayPause={() => setIsRadioPlaying(!isRadioPlaying)}
+                  onClosedCaptionsToggle={() => setShowClosedCaptions(!showClosedCaptions)}
+                  onRewind={() => console.log('Rewind')}
+                  onForward={() => console.log('Forward')}
+                  onSave={() => console.log('Save')}
+                  onShare={() => console.log('Share')}
+                />
+              </div>
+            </div>
+          )}
+
+          {activeComponent === 'homepage' && (
+            <div className="template-fullscreen-overlay">
+              <div className="template-fullscreen-content">
+                
+                <Header
+                  role="user"
+                  userName={templateUserName}
+                  onMenuClick={() => setIsSidebarOpen(!isSidebarOpen)}
+                  onSearchClick={() => console.log('Search clicked')}
+                  onAvatarClick={() => console.log('Avatar clicked')}
+                />
+                
+                <div className="template-body">
+                  <Sidebar
+                    role="user"
+                    variant="desktop"
+                    isOpen={isSidebarOpen}
+                    onMenuItemClick={(itemId) => console.log('Clicked:', itemId)}
+                  />
+                  
+                  <div className="template-main-content template-main-full-width">
+                    <div className="homepage-container">
+                      {/* Tabs */}
+                      <div className="homepage-tabs">
+                        <div className="homepage-tabs-scroll">
+                          {['All', 'CME/CE', 'Industry Features', 'Medical News', 'Nutrition', 'Dermatology', 'Emergency Medicine'].map((tab) => (
+                            <button
+                              key={tab}
+                              className={`homepage-tab ${activeTab === tab ? 'active' : ''}`}
+                              onClick={() => setActiveTab(tab)}
+                            >
+                              {tab}
+                            </button>
+                          ))}
+                        </div>
+                        <button 
+                          className="homepage-settings-button"
+                          onClick={() => console.log('Settings clicked')}
+                          aria-label="Settings"
+                        >
+                          <Icon name="settings-01" size="md" color="#1c1c1c" />
+                        </button>
+                      </div>
+                      
+                      <div className="media-card-grid">
+                        <MediaCard
+                          imageUrl="https://images.unsplash.com/photo-1559757175-0eb30cd8c063?w=400&h=225&fit=crop"
+                          category="CME/CE"
+                          title="Driving Progress in Cardiology: Exploring the Role of Factor XI Inhibitors in Acute Coronary Syndromes and Beyond - A Comprehensive Review"
+                          faculty="Steven Ferrucci, OD, FAAO; Brenda Yeh, OD, FAAO"
+                          credits="1.50 credits"
+                          hasVideo={true}
+                          onClick={() => console.log('Card clicked')}
+                        />
+                        
+                        <MediaCard
+                          imageUrl="https://images.unsplash.com/photo-1581594549595-35f6edc7b762?w=400&h=225&fit=crop"
+                          category="CME/CE"
+                          title="Advances in Neurology"
+                          faculty="Emily Rodriguez, MD, PhD; James Smith, MD"
+                          credits="2.00 credits"
+                          hasVideo={true}
+                          hasClosedCaption={true}
+                          onClick={() => console.log('Card clicked')}
+                        />
+                        
+                        <MediaCard
+                          imageUrl="https://images.unsplash.com/photo-1579684385127-1ef15d508118?w=400&h=225&fit=crop"
+                          category="CME/CE"
+                          title="Oncology Update: Immunotherapy in the Treatment of Metastatic Melanoma"
+                          faculty="Lisa Anderson, MD, FASCO"
+                          credits="1.25 credits"
+                          hasVideo={true}
+                          onClick={() => console.log('Card clicked')}
+                        />
+                        
+                        <MediaCard
+                          imageUrl="https://images.unsplash.com/photo-1551076805-e1869033e561?w=400&h=225&fit=crop"
+                          category="CME/CE"
+                          title="Diabetes Management: New Guidelines for Type 2 Diabetes in Primary Care Settings and Outpatient Clinics"
+                          faculty="Robert Williams, MD; Patricia Lee, MD, CDE"
+                          hasVideo={true}
+                          onClick={() => console.log('Card clicked')}
+                        />
+                        
+                        <MediaCard
+                          imageUrl="https://images.unsplash.com/photo-1584820927498-cfe5211fd8bf?w=400&h=225&fit=crop"
+                          category="Industry Features"
+                          title="Medical Device Innovation"
+                          faculty="David Thompson, MD, FACS"
+                          credits="1.50 credits"
+                          hasVideo={true}
+                          hasClosedCaption={true}
+                          onClick={() => console.log('Card clicked')}
+                        />
+                        
+                        <MediaCard
+                          imageUrl="https://images.unsplash.com/photo-1576671081837-49000212a370?w=400&h=225&fit=crop"
+                          category="CME/CE"
+                          title="Respiratory Medicine: COVID-19 and Long-Term Pulmonary Complications Following Severe Acute Respiratory Syndrome"
+                          faculty="Maria Garcia, MD, FCCP; John Davis, MD"
+                          credits="2.25 credits"
+                          hasVideo={true}
+                          onClick={() => console.log('Card clicked')}
+                        />
+                        
+                        <MediaCard
+                          imageUrl="https://images.unsplash.com/photo-1631217868264-e5b90bb7e133?w=400&h=225&fit=crop"
+                          category="Medical News"
+                          title="Pediatric Asthma Management"
+                          faculty="Susan Miller, MD, FAAP"
+                          hasVideo={true}
+                          hasClosedCaption={true}
+                          onClick={() => console.log('Card clicked')}
+                        />
+                        
+                        <MediaCard
+                          imageUrl="https://images.unsplash.com/photo-1530026405186-ed1f139313f8?w=400&h=225&fit=crop"
+                          category="CME/CE"
+                          title="Mental Health Update: Treating Depression in the Modern Healthcare Environment"
+                          faculty="Jennifer Brown, MD; Thomas Wilson, MD, PhD"
+                          credits="1.00 credits"
+                          hasVideo={true}
+                          onClick={() => console.log('Card clicked')}
+                        />
+                        
+                        <MediaCard
+                          category="Medical News"
+                          title="New Study Reveals Link Between Sleep Deprivation and Cardiovascular Risk"
+                          summary="Researchers from multiple institutions have found compelling evidence that chronic sleep deprivation significantly increases the risk of cardiovascular disease. The study followed over 10,000 participants for five years and found that those sleeping less than six hours per night had a 48% higher risk of developing heart conditions."
+                          author="Sarah Thompson, Medical Journalist"
+                          date="January 5, 2026"
+                          colorVariant="blue"
+                          onClick={() => console.log('Card clicked')}
+                        />
+                        
+                        <MediaCard
+                          imageUrl="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=400&h=225&fit=crop"
+                          category="Dermatology"
+                          title="Advances in Psoriasis Treatment: Biologics and Emerging Therapies for Moderate to Severe Plaque Psoriasis in Adult Patients"
+                          faculty="Michael Chen, MD, FAAD; Rachel Martinez, MD"
+                          credits="1.75 credits"
+                          hasVideo={true}
+                          hasClosedCaption={true}
+                          onClick={() => console.log('Card clicked')}
+                        />
+                        
+                        <MediaCard
+                          category="Industry Features"
+                          title="Digital Health Technologies Transforming Patient Care"
+                          summary="The integration of artificial intelligence, wearable devices, and telemedicine platforms is revolutionizing how healthcare providers deliver care. Recent data shows a 65% increase in patient engagement when digital health tools are implemented, leading to better health outcomes and reduced hospital readmissions."
+                          author="Michael Rodriguez, Healthcare Tech Reporter"
+                          date="January 3, 2026"
+                          onClick={() => console.log('Card clicked')}
+                        />
+                        
+                        <MediaCard
+                          imageUrl="https://images.unsplash.com/photo-1505751172876-fa1923c5c528?w=400&h=225&fit=crop"
+                          category="Emergency Medicine"
+                          title="Trauma Management"
+                          faculty="Christopher Lewis, MD, FACEP"
+                          credits="2.50 credits"
+                          hasVideo={true}
+                          onClick={() => console.log('Card clicked')}
+                        />
+                        
+                        <MediaCard
+                          imageUrl="https://images.unsplash.com/photo-1532938911079-1b06ac7ceec7?w=400&h=225&fit=crop"
+                          category="Nutrition"
+                          title="Nutritional Interventions for Metabolic Syndrome Management and Prevention in High-Risk Patient Populations: A Comprehensive Guide"
+                          faculty="Amanda Foster, RD, PhD; Daniel White, MD"
+                          hasVideo={true}
+                          onClick={() => console.log('Card clicked')}
+                        />
+                        
+                        <MediaCard
+                          imageUrl="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=400&h=225&fit=crop"
+                          category="CME/CE"
+                          title="Hypertension Guidelines"
+                          faculty="Kenneth Taylor, MD, FACC; Laura Anderson, MD"
+                          credits="1.50 credits"
+                          hasVideo={true}
+                          hasClosedCaption={true}
+                          onClick={() => console.log('Card clicked')}
+                        />
+                        
+                        <MediaCard
+                          imageUrl="https://images.unsplash.com/photo-1551190822-a9333d879b1f?w=400&h=225&fit=crop"
+                          category="Industry Features"
+                          title="AI in Radiology: Transforming Diagnostic Imaging and Clinical Decision Making"
+                          faculty="Sophia Kim, MD; Andrew Johnson, PhD"
+                          credits="1.75 credits"
+                          hasVideo={true}
+                          onClick={() => console.log('Card clicked')}
+                        />
+                        
+                        <MediaCard
+                          category="CME/CE"
+                          title="Understanding Pharmacogenomics in Clinical Practice"
+                          summary="This comprehensive review explores how genetic variations affect drug metabolism and response. Learn how to apply pharmacogenomic testing to optimize medication selection and dosing for your patients, improving therapeutic outcomes while minimizing adverse effects."
+                          author="Robert Chen, PharmD, PhD"
+                          date="December 28, 2025"
+                          credits="1.50 credits"
+                          onClick={() => console.log('Card clicked')}
+                        />
+                        
+                        <MediaCard
+                          imageUrl="https://images.unsplash.com/photo-1584982751601-97dcc096659c?w=400&h=225&fit=crop"
+                          category="Medical News"
+                          title="Antibiotic Resistance"
+                          faculty="Victoria Greene, MD, FIDSA"
+                          hasVideo={true}
+                          hasClosedCaption={true}
+                          onClick={() => console.log('Card clicked')}
+                        />
+                        
+                        <MediaCard
+                          imageUrl="https://images.unsplash.com/photo-1579154204601-01588f351e67?w=400&h=225&fit=crop"
+                          category="CME/CE"
+                          title="Chronic Kidney Disease: Early Detection and Intervention Strategies for Improved Patient Outcomes"
+                          faculty="Richard Parker, MD, FASN; Michelle Roberts, MD"
+                          credits="1.75 credits"
+                          hasVideo={true}
+                          onClick={() => console.log('Card clicked')}
+                        />
+                        
+                        <MediaCard
+                          category="Nutrition"
+                          title="Gut Microbiome and Metabolic Health"
+                          summary="Recent research highlights the critical role of gut microbiota in metabolic regulation. This article discusses evidence-based nutritional interventions that can modulate the microbiome to improve insulin sensitivity, reduce inflammation, and support weight management in patients with metabolic syndrome."
+                          author="Sarah Mitchell, RD, PhD"
+                          date="January 1, 2026"
+                          onClick={() => console.log('Card clicked')}
+                        />
+                        
+                        <MediaCard
+                          imageUrl="https://images.unsplash.com/photo-1576671081837-8e98579b1145?w=400&h=225&fit=crop"
+                          category="Nutrition"
+                          title="Plant-Based Diets in Cardiovascular Disease Prevention"
+                          faculty="Catherine Hughes, RD, CDE; Mark Stevens, MD"
+                          credits="1.00 credits"
+                          hasVideo={true}
+                          onClick={() => console.log('Card clicked')}
+                        />
+                        
+                        <MediaCard
+                          imageUrl="https://images.unsplash.com/photo-1516841273335-e39b37888115?w=400&h=225&fit=crop"
+                          category="CME/CE"
+                          title="Gastroenterology Update: Management of Inflammatory Bowel Disease in Adult and Pediatric Populations Using Evidence-Based Approaches"
+                          faculty="Nathan Cooper, MD, FACG; Jessica Williams, MD"
+                          hasVideo={true}
+                          hasClosedCaption={true}
+                          onClick={() => console.log('Card clicked')}
+                        />
+                        
+                        <MediaCard
+                          imageUrl="https://images.unsplash.com/photo-1582719508461-905c673771fd?w=400&h=225&fit=crop"
+                          category="Dermatology"
+                          title="Melanoma Screening"
+                          faculty="Elizabeth Moore, MD, FAAD"
+                          credits="1.75 credits"
+                          hasVideo={true}
+                          onClick={() => console.log('Card clicked')}
+                        />
+                        
+                        <MediaCard
+                          imageUrl="https://images.unsplash.com/photo-1571844307880-751c6d86f3f3?w=400&h=225&fit=crop"
+                          category="Emergency Medicine"
+                          title="Cardiac Arrest Management: Latest Resuscitation Guidelines"
+                          faculty="Brian Turner, MD, FACEP; Sarah Phillips, MD"
+                          credits="2.50 credits"
+                          hasVideo={true}
+                          hasClosedCaption={true}
+                          onClick={() => console.log('Card clicked')}
+                        />
+                        
+                        <MediaCard
+                          imageUrl="https://images.unsplash.com/photo-1559757175-5700dde675bc?w=400&h=225&fit=crop"
+                          category="Medical News"
+                          title="Orthopedic Advances: Minimally Invasive Joint Replacement Surgery Techniques and Long-Term Patient Outcomes in Total Hip and Knee Arthroplasty"
+                          faculty="Kevin Martinez, MD, FAAOS"
+                          hasVideo={true}
+                          onClick={() => console.log('Card clicked')}
+                        />
+                        
+                        <MediaCard
+                          imageUrl="https://images.unsplash.com/photo-1559757175-0eb30cd8c063?w=400&h=225&fit=crop"
+                          category="CME/CE"
+                          title="COPD Management"
+                          faculty="Rachel Bennett, MD, FCCP; Gregory Adams, MD"
+                          credits="1.75 credits"
+                          hasVideo={true}
+                          hasClosedCaption={true}
+                          onClick={() => console.log('Card clicked')}
+                        />
+                        
+                        <MediaCard
+                          imageUrl="https://images.unsplash.com/photo-1631815588090-d4bfec5b1ccb?w=400&h=225&fit=crop"
+                          category="Industry Features"
+                          title="Telemedicine Revolution: Virtual Care in Post-Pandemic Healthcare"
+                          faculty="Monica Clark, MD, MPH; Peter Richardson, MD"
+                          credits="2.00 credits"
+                          hasVideo={true}
+                          onClick={() => console.log('Card clicked')}
+                        />
+                        
+                        <MediaCard
+                          imageUrl="https://images.unsplash.com/photo-1579684453423-f84349ef60b0?w=400&h=225&fit=crop"
+                          category="Nutrition"
+                          title="Obesity Management: Evidence-Based Nutritional Strategies and Behavioral Interventions for Sustainable Weight Loss and Metabolic Health Improvement"
+                          faculty="Diana Wright, RD, PhD; Timothy Hall, MD"
+                          hasVideo={true}
+                          onClick={() => console.log('Card clicked')}
+                        />
+                        
+                        <MediaCard
+                          imageUrl="https://images.unsplash.com/photo-1581594693702-fbdc51b2763b?w=400&h=225&fit=crop"
+                          category="CME/CE"
+                          title="Rheumatoid Arthritis with Biologics"
+                          faculty="Alan Scott, MD, FACR; Michelle Baker, MD"
+                          credits="2.00 credits"
+                          hasVideo={true}
+                          hasClosedCaption={true}
+                          onClick={() => console.log('Card clicked')}
+                        />
+                        
+                        <MediaCard
+                          imageUrl="https://images.unsplash.com/photo-1584820927498-cfe5211fd8bf?w=400&h=225&fit=crop"
+                          category="Medical News"
+                          title="Urology Update: Advances in Prostate Cancer Screening"
+                          faculty="George Nelson, MD, FACS"
+                          credits="1.50 credits"
+                          hasVideo={true}
+                          onClick={() => console.log('Card clicked')}
+                        />
                       </div>
                     </div>
                   </div>

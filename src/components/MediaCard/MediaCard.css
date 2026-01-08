@@ -1,0 +1,190 @@
+.media-card {
+  display: flex;
+  flex-direction: column;
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.media-card:hover {
+  background: #f4f4f3;
+  box-shadow: 0 0 0 8px #f4f4f3;
+}
+
+.media-card-text-only {
+  background: #f9f9f8;
+  padding: 8px;
+}
+
+.media-card-text-only:hover {
+  background: #f4f4f3;
+}
+
+.media-card-color-blue {
+  background: #e8f4f8;
+}
+
+.media-card-color-orange {
+  background: #fff4e8;
+}
+
+.media-card-color-green {
+  background: #e8f8f0;
+}
+
+.media-card-color-purple {
+  background: #f3e8f8;
+}
+
+.media-card-color-pink {
+  background: #ffe8f0;
+}
+
+/* Image Container */
+.media-card-image-container {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: #f4f4f3;
+  border-radius: 12px;
+}
+
+.media-card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 50%;
+  border-radius: 12px 12px 0 0;
+}
+
+.media-card-badges {
+  position: absolute;
+  bottom: 8px;
+  left: 8px;
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.media-card-badge {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.6);
+  border-radius: 4px;
+}
+
+/* Body */
+.media-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px 0;
+}
+
+.media-card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+}
+
+.media-card-category {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  color: #1c1c1c;
+  margin: 0;
+}
+
+.media-card-title {
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 22px;
+  color: #1c1c1c;
+  margin: 0;
+  height: auto;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+/* Summary */
+.media-card-summary {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  color: #6c6c72;
+  margin: 0;
+  height: auto;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Meta (Author and Date) */
+.media-card-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.media-card-author,
+.media-card-date {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+  color: #9c9c9c;
+}
+
+.media-card-meta-separator {
+  color: #dcdcdc;
+  font-size: 12px;
+}
+
+/* Faculty */
+.media-card-faculty {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  color: #6c6c72;
+  margin: 0;
+  height: auto;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Footer */
+.media-card-footer {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  height: auto;
+}
+
+.media-card-credits {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  color: #1c1c1c;
+  margin: 0;
+  height: auto;
+}

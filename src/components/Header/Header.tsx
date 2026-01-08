@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Icon } from '../Icon';
+import { AccountDropdown } from '../AccountDropdown';
 import './Header.css';
 
 export type HeaderRole = 'guest' | 'user';
@@ -34,6 +35,35 @@ export function Header({
   className = ''
 }: HeaderProps) {
   const containerClasses = `header ${className}`.trim();
+  const [showAccountDropdown, setShowAccountDropdown] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setShowAccountDropdown(false);
+      }
+    };
+
+    if (showAccountDropdown) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [showAccountDropdown]);
+
+  const handleAvatarClick = () => {
+    setShowAccountDropdown(!showAccountDropdown);
+    onAvatarClick?.();
+  };
+
+  const handleDropdownItemClick = (callback?: () => void) => {
+    setShowAccountDropdown(false);
+    callback?.();
+  };
 
   return (
     <header className={containerClasses}>
@@ -112,8 +142,9 @@ export function Header({
             
             <button 
               className="avatar-button" 
-              onClick={onAvatarClick}
+              onClick={handleAvatarClick}
               aria-label="User menu"
+              aria-expanded={showAccountDropdown}
             >
               <div className="avatar">
                 {userAvatar ? (
@@ -128,6 +159,21 @@ export function Header({
                 <Icon name="chevron-down" size="xs" color="#6c6c72" />
               </div>
             </button>
+
+            {showAccountDropdown && (
+              <div className="account-dropdown-container" ref={dropdownRef}>
+                <AccountDropdown
+                  userName={userName}
+                  userAvatar={userAvatar}
+                  onCreditsClick={() => handleDropdownItemClick()}
+                  onHistoryClick={() => handleDropdownItemClick()}
+                  onSavedClick={() => handleDropdownItemClick()}
+                  onSubscriptionsClick={() => handleDropdownItemClick()}
+                  onSettingsClick={() => handleDropdownItemClick()}
+                  onLogoutClick={() => handleDropdownItemClick()}
+                />
+              </div>
+            )}
           </div>
         )}
       </div>

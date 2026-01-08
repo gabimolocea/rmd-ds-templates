@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import { Icon, IconName } from '../Icon/Icon';
+import qrImage from '../Icon/icons/🎨 Foundation/qr-image.png';
 import './Sidebar.css';
-
-// iOS App Promo Image (QR Code)
-const IOS_APP_PROMO_IMAGE = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNzIiIGhlaWdodD0iNzIiIHZpZXdCb3g9IjAgMCA3MiA3MiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8cmVjdCB3aWR0aD0iNzIiIGhlaWdodD0iNzIiIGZpbGw9IiNGNEY0RjMiLz4KICA8dGV4dCB4PSI1MCUiIHk9IjUwJSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzZDNkM3MiIgZm9udC1zaXplPSIxMiIgZm9udC1mYW1pbHk9IkludGVyIj5RUiBDb2RlPC90ZXh0Pgo8L3N2Zz4=';
 
 export interface SidebarMenuItem {
   id: string;
@@ -26,11 +24,11 @@ export interface SidebarProps {
 }
 
 const DEFAULT_MENU_ITEMS: SidebarMenuItem[] = [
-  { id: 'home', label: 'Home', icon: 'home-01' },
+  { id: 'home', label: 'Home', icon: 'home-02' },
   { 
     id: 'cme', 
     label: 'CME/CE', 
-    icon: 'graduation-hat-01',
+    icon: 'graduation-hat-02',
     children: [
       {
         id: 'cme-series',
@@ -86,11 +84,11 @@ const DEFAULT_MENU_ITEMS: SidebarMenuItem[] = [
       }
     ]
   },
-  { id: 'specialty', label: 'Specialty', icon: 'stethoscope' },
+  { id: 'specialty', label: 'Specialty', icon: 'stethoscope-1' },
   { id: 'industry', label: 'Industry Features', icon: 'lightbulb-02' },
-  { id: 'news', label: 'News', icon: 'file-04' },
+  { id: 'news', label: 'News', icon: 'layout-alt-02' },
   { id: 'live', label: 'Live', icon: 'video-recorder' },
-  { id: 'series', label: 'Series', icon: 'layers-three-01' },
+  { id: 'series', label: 'Series', icon: 'series-01' },
   { id: 'explore', label: 'Explore' },
   { id: 'clara', label: 'Clara', icon: 'stars-01' },
   { id: 'qchallenge', label: 'Q-Challenge', icon: 'trophy-01' },
@@ -147,6 +145,17 @@ export const Sidebar: React.FC<SidebarProps> = ({
     const isActive = activeItemId === item.id;
     const hasChildren = item.children && item.children.length > 0;
     const isSection = level === 0 && !item.icon && item.label !== 'Explore';
+    const isExplore = item.label === 'Explore';
+
+    if (isExplore) {
+      return (
+        <div key={item.id} className={`sidebar-menu-item-wrapper level-${level}`}>
+          <div className="sidebar-explore-label">
+            {item.label}
+          </div>
+        </div>
+      );
+    }
 
     return (
       <div key={item.id} className={`sidebar-menu-item-wrapper level-${level}`}>
@@ -206,13 +215,11 @@ export const Sidebar: React.FC<SidebarProps> = ({
     >
       <nav className="sidebar-nav">
         {menuItems.map(item => renderMenuItem(item))}
-      </nav>
-
-      {isDesktop && (
-        <div className="sidebar-footer">
+        
+        {isDesktop && (
           <div className="ios-app-promo">
             <img 
-              src={IOS_APP_PROMO_IMAGE} 
+              src={qrImage} 
               alt="Download iOS App" 
               className="ios-qr-code"
             />
@@ -220,8 +227,8 @@ export const Sidebar: React.FC<SidebarProps> = ({
               Continue your experience in our iOS app!
             </p>
           </div>
-        </div>
-      )}
+        )}
+      </nav>
     </aside>
   );
 };
